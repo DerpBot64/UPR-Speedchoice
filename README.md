@@ -2,7 +2,9 @@ Universal Pokemon Randomizer
 
 ### Version Derpbot 64.0.0
 
-Updates on top of previous changelog below:
+Updates on top of previous changelog below.
+
+See [**Emerald**](https://github.com/DerpBot64/pokeemerald-speedchoice) and [**FireRed**](https://github.com/DerpBot64/firered-speedchoice) for Speedchoice Versions compatible with this fork.
 
  - Update offsets to match firered and emerald 64.0.0
  - Also adds back Wynaut egg to emerald config, since it is now a speedchoice option to force it to be a ditto or not
