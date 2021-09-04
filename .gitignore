@@ -36,3 +36,13 @@ build/*
 build_eclipse.xml
 /customnames.rncn
 !.github/*
+universal-pokemon-randomizer.iml
+src/com/dabomstew/pkrandom/config/gen3_offsets custom working.ini
+offsets.txt
+.idea/vcs.xml
+.idea/runConfigurations.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/compiler.xml
+.idea/.name
+.classpath
