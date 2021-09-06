@@ -417,7 +417,11 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                         MessageDigest md = MessageDigest.getInstance("MD5");
                         byte[] digest = md.digest(rom);
                         String hash = Utils.toHexString(digest);
-                        return hash.equalsIgnoreCase(re.hash);
+                        
+                        //support more than 1 hash per version
+                        if(hash.equalsIgnoreCase(re.hash)) {
+                            return true;
+                        }
                     } catch (NoSuchAlgorithmException e) {
                         return false;
                     }
@@ -430,8 +434,19 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     @Override
     public void loadedRom() {
+      //support more than 1 hash per version
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        byte[] digest = md.digest(rom);
+        String hash = Utils.toHexString(digest);
+        
         for (RomEntry re : roms) {
-            if (romCode(rom, re.romCode) && (rom[0xBC] & 0xFF) == re.version) {
+            if (romCode(rom, re.romCode) && hash.equalsIgnoreCase(re.hash)) {
                 romEntry = new RomEntry(re); // clone so we can modify
                 break;
             }
