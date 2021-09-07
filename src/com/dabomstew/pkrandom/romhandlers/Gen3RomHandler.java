@@ -1371,13 +1371,9 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         // Grab the *real* pointer to data
         int dataOffset = readPointer(offset + 4);
 
-        if (romEntry.romCode.equals("SPDC")) // Emerald speedchoice
+        if (romEntry.romCode.equals("SPDC")||romEntry.romCode.equals("MBDN")) // Emerald speedchoice
         {
             numOfEntries = 2; // no memes allowed
-        }
-        else if (romEntry.romCode.equals("MBDN")) // FireRed speedchoice
-        {
-            numOfEntries = 6; // limited memes allowed
         }
 
         // Read the entries
@@ -1646,51 +1642,22 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         // Grab the *real* pointer to data
         int dataOffset = readPointer(offset + 4);
 
-        if (romEntry.romCode.equals("SPDC")) // Emerald speedchoice
+        if (romEntry.romCode.equals("SPDC")||romEntry.romCode.equals("MBDN")) 
         {
             numOfEntries = 2;
-        }
-        else if (romEntry.romCode.equals("MBDN"))
-        {
-            numOfEntries = 6;
         }
         // Write the entries
         for (int i = 0; i < numOfEntries; i++) {
             Encounter enc = encounters.encounters.get(i);
-            if (romEntry.romCode.equals("MBDN"))
+            // min, max, species, species
+            writeWord(dataOffset + i * 4 + 2, pokedexToInternal[enc.pokemon.number]);
+            // Speedchoice duplication.. 4 extra times
+            if (romEntry.romCode.equals("SPDC")||romEntry.romCode.equals("MBDN"))
             {
-                // OLD:   0 1
-                // GOOD:  2 3 2
-                // SUPER: 4 5 4 5 4
-                switch (i)
-                {
-                    case 2:
-                        writeWord(dataOffset + (i + 2) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                    case 0:
-                    case 1:
-                    case 3:
-                        writeWord(dataOffset + i * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                        break;
-                    case 4:
-                        writeWord(dataOffset + (i + 5) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                    case 5:
-                        writeWord(dataOffset + (i + 3) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                        writeWord(dataOffset + (i + 1) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                        break;
-                }
-            }
-            else
-            {
-                // min, max, species, species
-                writeWord(dataOffset + i * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                // Speedchoice duplication.. 4 extra times
-                if (romEntry.romCode.equals("SPDC")) // Emerald speedchoice
-                {
-                    writeWord(dataOffset + (i + numOfEntries) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                    writeWord(dataOffset + (i + numOfEntries * 2) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                    writeWord(dataOffset + (i + numOfEntries * 3) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                    writeWord(dataOffset + (i + numOfEntries * 4) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
-                }
+                writeWord(dataOffset + (i + numOfEntries) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
+                writeWord(dataOffset + (i + numOfEntries * 2) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
+                writeWord(dataOffset + (i + numOfEntries * 3) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
+                writeWord(dataOffset + (i + numOfEntries * 4) * 4 + 2, pokedexToInternal[enc.pokemon.number]);
             }
         }
     }

@@ -196,9 +196,9 @@ public class RandomizerGUI extends javax.swing.JFrame {
         if (!haveCheckedCustomNames) {
             checkCustomNames();
         }
-        if (autoUpdateEnabled) {
+        /*if (autoUpdateEnabled) {
             new UpdateCheckThread(this, false).start();
-        }
+        }*/
     }
 
     private void guiCleanup() {
