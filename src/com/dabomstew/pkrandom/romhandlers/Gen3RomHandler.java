@@ -2924,7 +2924,10 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             return Gen3Constants.rsRequiredFieldTMs;
         } else {
             // emerald has a few TMs from pickup
-            return Gen3Constants.eRequiredFieldTMs;
+            //return Gen3Constants.eRequiredFieldTMs;
+            
+            //but screw that
+            return Gen3Constants.rsRequiredFieldTMs;
         }
     }
 
