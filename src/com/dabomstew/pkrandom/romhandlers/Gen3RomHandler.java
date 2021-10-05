@@ -2434,7 +2434,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                                                                       // stone
                         logEvoChangeStone(evo.from.name, evo.to.name, itemNames[Gen3Constants.moonStoneIndex]);
                     }
-                    if (evo.type == EvolutionType.LEVEL_HIGH_BEAUTY && romEntry.romType == Gen3Constants.RomType_FRLG) {
+                    if (evo.type == EvolutionType.LEVEL_HIGH_BEAUTY) {
                         // beauty change to level 35
                         evo.type = EvolutionType.LEVEL;
                         evo.extraInfo = 35;
