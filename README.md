@@ -1,6 +1,6 @@
 Universal Pokemon Randomizer
 
-### Version Derpbot 64.0.1
+### Version Derpbot 64.0.2
 
 Updates on top of previous changelog below.
 
